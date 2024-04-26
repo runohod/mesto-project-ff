@@ -29,6 +29,7 @@ function deleteCard(elementToDelete) {
 }
  
 
+
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function(initialCardData)  {
   const newCard = createCard(initialCardData, deleteCard);

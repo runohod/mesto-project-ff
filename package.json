@@ -1,0 +1,18 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "https://github.com/runohod/mesto-project-ff.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
+
+

@@ -35,3 +35,5 @@ initialCards.forEach(function(initialCardData)  {
   const newCard = createCard(initialCardData, deleteCard);
   cardsContainer.append(newCard);
 });
+
+console.log('Hello, World!');

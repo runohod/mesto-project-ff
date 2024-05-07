@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); 
+
 
 module.exports = {
     entry: { main: './src/index.js' },
@@ -18,22 +20,26 @@ module.exports = {
     open: true
   },
     module: {
-    rules: [ // rules — это массив правил
-      // добавим в него объект правил для бабеля
-      {
-        // регулярное выражение, которое ищет все js файлы
-        test: /\.js$/,
-        // при обработке этих файлов нужно использовать babel-loader
-        use: 'babel-loader',
-        // исключает папку node_modules, файлы в ней обрабатывать не нужно
-        exclude: '/node_modules/'
-      }
-      ]
+        rules: [
+            // правила для обработки js, html и других файлов
+          
+            // добавьте ещё одно правило:
+            {
+              // применять это правило только к CSS-файлам
+              test: /\.css$/,
+              // при обработке этих файлов нужно использовать
+              // MiniCssExtractPlugin.loader и css-loader
+              use: [MiniCssExtractPlugin.loader, {
+                loader: 'css-loader'
+              }]
+            }
+          ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: 'src/index.html'
     }),
-    new CleanWebpackPlugin(), // использовали плагин
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin() // подключение плагина для объединения файлов
   ]
 };

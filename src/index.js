@@ -1,3 +1,8 @@
+import './pages/index.css';
+import {initialCards} from './cards.js';
+import {createCard, deleteCard, likeButton} from './components/card.js';
+import {openModal, closeModal} from './components/modal.js';
+
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -36,5 +41,3 @@ initialCards.forEach(function(initialCardData)  {
   cardsContainer.append(newCard);
 });
 
-
-import './pages/index.css';

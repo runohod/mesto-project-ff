@@ -1,7 +1,5 @@
-import './pages/index.css';
+import '../src/pages/index.css'
 import {initialCards} from './cards.js';
-import {createCard, deleteCard, likeButton} from './components/card.js';
-import {openModal, closeModal} from './components/modal.js';
 
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector('#card-template').content;
@@ -33,7 +31,6 @@ function deleteCard(elementToDelete) {
   elementToDelete.remove();
 }
  
-
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function(initialCardData)  {

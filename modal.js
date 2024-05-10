@@ -39,3 +39,5 @@ editModal.addEventListeener("click", (event) => {
         resetForm ();
     }
 }); 
+
+//кнопка для просматра картинки 

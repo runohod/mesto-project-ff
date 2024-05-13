@@ -1,7 +1,7 @@
-import '../src/pages/index.css'
+import '../pages/index.css'
 import {initialCards} from './cards.js';
 import {createCard, delCard, toggleCardLike} from "./card.js";
-import {openModal, closeModal, setCloseClickListeners} from "./components/modal";
+import {openModal, closeModal, setCloseClickListeners} from "./modal";
 
 //DOM узлы
 const cardsContainer = document.querySelector('.places__list');

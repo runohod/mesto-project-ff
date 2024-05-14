@@ -6,10 +6,10 @@ import {openModal, closeModal, setCloseClickListeners} from "./modal";
 //DOM узлы
 const cardsContainer = document.querySelector('.places__list');
 
-const editProfileBtn = document.querySelector('.profile__edit-button')
-const editProfilePopup = document.querySelector('.popup_type_edit');
-const createNewCardBtn = document.querySelector('.profile__add-button')
-const createNewCardPopup = document.querySelector('.popup_type_new-card');
+const buttonOpenPopupProfile = document.querySelector('.profile__edit-button')
+const popupOpenProfile = document.querySelector('.popup_type_edit');
+const buttonCreateNewCard = document.querySelector('.profile__add-button')
+const popupCreateNewCard = document.querySelector('.popup_type_new-card');
 const imagePopup = document.querySelector('.popup_type_image');
 
 const profileTitle = document.querySelector('.profile__title');
@@ -22,7 +22,7 @@ const cardUrlInput = document.querySelector('.popup__input_type_url');
 const popupImage = imagePopup.querySelector('.popup__image');
 const popupCaption = imagePopup.querySelector('.popup__caption');
 
-const popupList = [editProfilePopup, createNewCardPopup, imagePopup]
+const popupList = [popupOpenProfile, popupCreateNewCard, imagePopup]
 
 // Вывести карточки на страницу
 function renderCards(array, delCard, likeCard, onImageClick) {
@@ -43,22 +43,22 @@ function onImageClick(image) {
 }
 
 // вешаем обработчики на окно редактирования имени профили и на окно добавления карточки
-editProfileBtn.addEventListener('click', () => {
+buttonOpenPopupProfile.addEventListener('click', () => {
   // изменение имени профиля и добавление новой карточки
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileTitle.textContent;
-  openModal(editProfilePopup)
+  openModal(popupOpenProfile)
 })
 
-createNewCardBtn.addEventListener('click', () => {
-  openModal(createNewCardPopup)
+buttonCreateNewCard.addEventListener('click', () => {
+  openModal(popupCreateNewCard)
 })
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closeModal(editProfilePopup);
+  closeModal(popupOpenProfile);
 }
 
 function handleNewCardFormSubmit(evt) {
@@ -69,9 +69,9 @@ function handleNewCardFormSubmit(evt) {
   }
   cardsContainer.prepend(createCard(newItem, delCard, toggleCardLike, onImageClick));
   evt.target.reset()
-  closeModal(createNewCardPopup);
+  closeModal(popupCreateNewCard);
 }
 
-editProfilePopup.addEventListener("submit", handleProfileFormSubmit);
-createNewCardPopup.addEventListener("submit", handleNewCardFormSubmit);
+popupOpenProfile.addEventListener("submit", handleProfileFormSubmit);
+popupCreateNewCard.addEventListener("submit", handleNewCardFormSubmit);
 

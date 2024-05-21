@@ -14,6 +14,7 @@ function createCard(cardData, delCard, likeCard, onImageClick) {
   cardTitle.textContent = cardData.name;
   cardImage.loading = 'lazy'
 
+  
 
   deleteButton.addEventListener('click', function() {
     delCard(cardElement);

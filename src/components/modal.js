@@ -38,6 +38,4 @@ function closeModal(modal) {
   }
  
 export {openModal, closeModal, setCloseClickListeners}
-//функция открытия по нажатии кнопки «Редактировать»
-//функция открытия по нажатии кнопки «+»
-//функция открытия по нажатию на картинку
+

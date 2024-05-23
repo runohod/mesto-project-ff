@@ -143,7 +143,19 @@ const changeButtonText = (isLoading, button) => {
   button.textContent = isLoading ? "Сохранение..." : "Сохранить";
 };
 
-
+//Получение информации о пользователе и карточках с сервера и заполнение ими страницы
+let profileId;
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([profileData, cardsData]) => {
+    profileId = profileData._id;
+    avatarImage.style.backgroundImage = `url(\\${profileData.avatar})`;
+    profileTitle.textContent = profileData.name;
+    profileDescription.textContent = profileData.about;
+    cardsData.forEach((item) => {
+      cardsContainer.append(addCard(cardData, delCard, toggleCardLike, openPopupImg, profileId));
+    });
+  })
+  .catch(console.error);  
 
 
 

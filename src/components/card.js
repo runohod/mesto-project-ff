@@ -4,7 +4,7 @@ import { deleteLike, addLike, deleteMyCard } from "../components/api.js";
 const cardTemplate = document.querySelector("#card-template").content;
 
 //Функция создания карточки
-function createCard(cardData, delCard, likeCard, onImageClick, profileId) {
+function createCard(cardData, removeCallback, likeCallback, onImageClick, profileId) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const likeButton = cardElement.querySelector(".card__like-button");
@@ -24,15 +24,15 @@ function createCard(cardData, delCard, likeCard, onImageClick, profileId) {
   if (cardData.owner._id === profileId) deleteButton.style.display = "block";
   else deleteButton.style.display = "none";
 
-  deleteButton.addEventListener("click", () => delCard(cardElement, cardData));
-  likeButton.addEventListener("click", () => likeCard(cardData, likeButton, likeCounter));
+  deleteButton.addEventListener("click", () => removeCallback(cardElement, cardData));
+  likeButton.addEventListener("click", () => likeCallback(cardData, likeButton, likeCounter));
   cardImage.addEventListener("click", () => onImageClick({ name: cardData.name, link: cardData.link }));
 
   return cardElement;
 };
 
 // Удаление карточки
-const removeCard = (cardElement, cardData) => {
+const delCard = (cardElement, cardData) => {
   deleteMyCard(cardData._id)
     .then(() => cardElement.remove())
     .catch((error) => {
@@ -42,7 +42,7 @@ const removeCard = (cardElement, cardData) => {
 
 
  // Постановка и удаление лайка
-const likeCard = (cardData, likeButton, likeCounter) => {
+const LikeCard = (cardData, likeButton, likeCounter) => {
   const likeFunction = likeButton.classList.contains("card__like-button_is-active")
     ? deleteLike
     : addLike;
@@ -57,5 +57,5 @@ const likeCard = (cardData, likeButton, likeCounter) => {
     });
 };
 
-export {createCard, delCard, toggleCardLike};
+export {createCard, delCard, LikeCard};
 

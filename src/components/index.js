@@ -81,7 +81,7 @@ const handleAddForm = (evt) => {
 
   addNewCard(cardValue, linkValue)
     .then((cardData) => {
-      const cardElement = addCard(cardData, delCard, toggleCardLike, openPopupImg, profileId);
+      const cardElement = createCard(cardData, delCard, toggleCardLike, openPopupImg, profileId);
       cardsContainer.prepend(cardElement);
       closeModal(popupNewCard);
     })
@@ -152,7 +152,7 @@ Promise.all([getUserInfo(), getInitialCards()])
     profileTitle.textContent = profileData.name;
     profileDescription.textContent = profileData.about;
     cardsData.forEach((item) => {
-      cardsContainer.append(addCard(cardData, delCard, toggleCardLike, openPopupImg, profileId));
+      cardsContainer.append(createCard(cardData, delCard, toggleCardLike, openPopupImg, profileId));
     });
   })
   .catch(console.error);  

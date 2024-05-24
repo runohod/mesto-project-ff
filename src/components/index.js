@@ -1,6 +1,5 @@
 // Импорт файлов
 import '../pages/index.css'
-import {initialCards} from './cards.js';
 import {createCard, delCard, LikeCard} from "./card.js";
 import {openModal, closeModal, setCloseClickListeners} from "./modal";
 import { enableValidation, clearValidation, validationConfig } from "./validation.js";
@@ -156,6 +155,3 @@ Promise.all([getUserInfo(), getInitialCards()])
     });
   })
   .catch(console.error);  
-
-
-

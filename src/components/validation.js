@@ -6,7 +6,7 @@ const validationConfig = {
     submitButtonSelector: ".popup__button",
     inactiveButtonClass: "popup__button_inactive",
     inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__input-error_active",
+    errorClass: "popup__input-error_active", //немного не понл почему вы советуете перенести объект в индекс js  ведь он и так туда экспортируется 
   };
   
   // Показать ошибку валидации
@@ -94,9 +94,6 @@ const validationConfig = {
       document.querySelectorAll(validationConfig.formSelector)
     );
     formList.forEach((formElement) => {
-      formElement.addEventListener("submit", (evt) => {
-        evt.preventDefault();
-      });
       setEventListeners(formElement, validationConfig);
     });
   };

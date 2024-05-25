@@ -94,12 +94,12 @@ newCardForm.addEventListener("submit", handleAddForm);
 // Открытие попапа с картинкой
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
+const popupImgCaption = document.querySelector(".popup__caption");
 
 function openPopupImg({ name, link }) {
   popupImage.src = link;
   popupImage.alt = name;
-  popupCaption.textContent = name;
+  popupImgCaption.textContent = name;
   openModal(imagePopup);
 }
 
@@ -114,14 +114,14 @@ avatarImageButton.addEventListener("click", () => {
 
 // Изменение изображения аватара
 const editAvatarForm = document.forms["edit-avatar"];
-const AvatarSaveButton = popupEditAvatar.querySelector(".popup__button");
+const avatarSaveButton = popupEditAvatar.querySelector(".popup__button");
 const avatarLinkInput = popupEditAvatar.querySelector(".popup__input_type_url");
 const avatarImage = document.querySelector(".profile__image");
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
   const linkValue = avatarLinkInput.value;
-  changeButtonText(true, AvatarSaveButton);
+  changeButtonText(true, avatarSaveButton);
   updateAvatar(linkValue)
     .then((res) => {
       avatarImage.style.backgroundImage = `url('${res.avatar}')`;
@@ -129,7 +129,7 @@ function handleAvatarFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      changeButtonText(false, AvatarSaveButton);
+      changeButtonText(false, avatarSaveButton);
     });
 }
 editAvatarForm.addEventListener("submit", handleAvatarFormSubmit);

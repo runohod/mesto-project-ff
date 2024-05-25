@@ -1,13 +1,12 @@
 const config = {
     baseUrl: "https://nomoreparties.co/v1/wff-cohort-13",
     headers: {
-      authorization: "9461d58f-ab6e-4d09-b9bf-af27ed341fdd",
+      authorization: "fb5cc2b8-f098-4873-a829-99399ab469a7",
       "Content-Type": "application/json",
     },
   };
   
   // Проверка ответа и отклонение промиса
-  
   const getResData = (res) => {
     if (res.ok) {
       return res.json();
@@ -16,7 +15,6 @@ const config = {
   };
   
   // Загрузка информации о пользователе с сервера
-  
   const getUserInfo = () => {
     return fetch(`${config.baseUrl}/users/me`, {
       headers: config.headers,
@@ -24,7 +22,6 @@ const config = {
   };
   
   // Загрузка карточек с сервера
-  
   const getInitialCards = () => {
     return fetch(`${config.baseUrl}/cards`, {
       headers: config.headers,
@@ -32,7 +29,6 @@ const config = {
   };
   
   // Редактирование профиля
-  
   const editProfile = (userProfileName, userProfileAbout) => {
     return fetch(`${config.baseUrl}/users/me`, {
       method: "PATCH",
@@ -45,7 +41,6 @@ const config = {
   };
   
   // Добавление новой карточки на сервер
-  
   const addNewCard = (nameCard, linkCard) => {
     return fetch(`${config.baseUrl}/cards`, {
       method: "POST",
@@ -58,7 +53,6 @@ const config = {
   };
   
   // Удаление своей карточки
-  
   const deleteMyCard = (cardId) => {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
@@ -67,7 +61,6 @@ const config = {
   };
   
   // Добавление лайка
-  
   const addLike = (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
@@ -76,7 +69,6 @@ const config = {
   };
   
   // Удаление лайка
-  
   const deleteLike = (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
@@ -85,7 +77,6 @@ const config = {
   };
   
   // Отправка аватара
-  
   const updateAvatar = (avatar) => {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: "PATCH",

@@ -1,14 +1,3 @@
-// Объект настроек валидации
-
-const validationConfig = {
-    formSelector: ".popup",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button",
-    inactiveButtonClass: "popup__button_inactive",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__input-error_active", //немного не понл почему вы советуете перенести объект в индекс js  ведь он и так туда экспортируется 
-  };
-  
   // Показать ошибку валидации
   
   const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
@@ -109,4 +98,4 @@ const validationConfig = {
     inputList.forEach((inputElement) => {hideInputError(formElement, inputElement, validationConfig);});
   };
   
-  export { enableValidation, clearValidation, validationConfig };
+  export { enableValidation, clearValidation};

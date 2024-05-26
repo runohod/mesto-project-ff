@@ -2,7 +2,7 @@
 import '../pages/index.css'
 import {createCard, delCard, LikeCard} from "./card.js";
 import {openModal, closeModal, setCloseClickListeners} from "./modal";
-import { enableValidation, clearValidation, validationConfig } from "./validation.js";
+import { enableValidation, clearValidation} from "./validation.js";
 import { getUserInfo, getInitialCards, editProfile, addNewCard, updateAvatar } from "./api.js";
 
 //DOM узлы
@@ -19,6 +19,16 @@ buttonOpenPopupProfile.addEventListener("click", () => {
   jobInput.value = profileDescription.textContent;
   clearValidation(popupOpenProfile, validationConfig);
 });
+
+// Объект настроек валидации
+const validationConfig = {
+  formSelector: ".popup",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active", 
+};
 
 // Закрытие попапов
 buttonCloseList.forEach((btn) => {

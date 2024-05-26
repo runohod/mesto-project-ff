@@ -165,3 +165,5 @@ Promise.all([getUserInfo(), getInitialCards()])
     });
   })
   .catch(console.error);  
+
+  

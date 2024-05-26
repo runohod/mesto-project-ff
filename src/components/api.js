@@ -88,3 +88,5 @@ const config = {
   };
   
   export { getUserInfo, getInitialCards, editProfile, addNewCard, deleteMyCard, addLike, deleteLike, updateAvatar }
+
+  

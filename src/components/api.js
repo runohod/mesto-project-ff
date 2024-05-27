@@ -1,92 +1,98 @@
 const config = {
-    baseUrl: "https://nomoreparties.co/v1/wff-cohort-13",
-    headers: {
-      authorization: "fb5cc2b8-f098-4873-a829-99399ab469a7",
-      "Content-Type": "application/json",
-    },
-  };
-  
-  // Проверка ответа и отклонение промиса
-  const getResData = (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  };
-  
-  // Загрузка информации о пользователе с сервера
-  const getUserInfo = () => {
-    return fetch(`${config.baseUrl}/users/me`, {
-      headers: config.headers,
-    }).then((res) => getResData(res));
-  };
-  
-  // Загрузка карточек с сервера
-  const getInitialCards = () => {
-    return fetch(`${config.baseUrl}/cards`, {
-      headers: config.headers,
-    }).then((res) => getResData(res));
-  };
-  
-  // Редактирование профиля
-  const editProfile = (userProfileName, userProfileAbout) => {
-    return fetch(`${config.baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: config.headers,
-      body: JSON.stringify({
-        name: userProfileName,
-        about: userProfileAbout,
-      }),
-    }).then((res) => getResData(res));
-  };
-  
-  // Добавление новой карточки на сервер
-  const addNewCard = (nameCard, linkCard) => {
-    return fetch(`${config.baseUrl}/cards`, {
-      method: "POST",
-      headers: config.headers,
-      body: JSON.stringify({
-        name: nameCard,
-        link: linkCard,
-      }),
-    }).then((res) => getResData(res));
-  };
-  
-  // Удаление своей карточки
-  const deleteMyCard = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: config.headers,
-    }).then((res) => getResData(res));
-  };
-  
-  // Добавление лайка
-  const addLike = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: config.headers,
-    }).then((res) => getResData(res));
-  };
-  
-  // Удаление лайка
-  const deleteLike = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: config.headers,
-    }).then((res) => getResData(res));
-  };
-  
-  // Отправка аватара
-  const updateAvatar = (avatar) => {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      headers: config.headers,
-      body: JSON.stringify({
-        avatar,
-      }),
-    }).then((res) => getResData(res));
-  };
-  
-  export { getUserInfo, getInitialCards, editProfile, addNewCard, deleteMyCard, addLike, deleteLike, updateAvatar }
-
-  
+  baseUrl: "https://nomoreparties.co/v1/wff-cohort-13",
+  headers: {
+    authorization: "fb5cc2b8-f098-4873-a829-99399ab469a7",
+    "Content-Type": "application/json",
+  },
+};
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+// Функция для просмотра информации о пользователе
+export const getUserInfo = () => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers,
+  })
+    .then(checkResponse)
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
+};
+// Функция для посмотра массива с карточками
+export const getInitialCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  })
+    .then(checkResponse)
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
+};
+// Функция для обновлении информации о пользователе
+export const updateUserInfo = (userData) => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+    }),
+  })
+    .then(checkResponse)
+    .catch((err) => {
+      console.log(err);
+    });
+};
+// Функция для добавления новой карточки на сервер
+export const addNewCard = (cardData) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: cardData.name,
+      link: cardData.link,
+    }),
+  }).then(checkResponse);
+};
+// Функция для добавления лайка
+export const likeCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+// Функция для удаления лайка
+export const dislikeCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+// Функция для удаления карточки
+export const removeCard = (cardId) => {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+// Функция для добавления аватара
+export const addNewAvatar = (avatarUrl) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: avatarUrl,
+    }),
+  })
+    .then(checkResponse)
+    .then((data) => {
+      console.log("Изображение успешно добавлено", data);
+      return data;
+    });
+};

@@ -1,43 +1,33 @@
-
-function openModal(modal) {
-    modal.classList.add('popup_is-opened')
-    document.addEventListener('keydown', handleCloseEsc);
-  }
-
-//закрытие по клику на Esc
-  function handleCloseEsc(evt) {
-    if (evt.key === 'Escape') {
-      const openedModal = document.querySelector('.popup_is-opened')
-      closeModal(openedModal)
+// Функция закрытия модального окна через Escape
+function handleEscClose(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".popup_is-opened");
+    if (openedModal) {
+      closeModal(openedModal);
     }
   }
-
-//закрытие кликом на оверлей
-  function handleCloseOverlay(evt) {
-    if (evt.target === evt.currentTarget) {
-      closeModal(evt.target)
-    }
-  } 
-
-//закрытие при клике по крестику
-function setCloseClickListeners(popupList) {
-    popupList.forEach(popup => {
-      // находим кнопку закрытия попапа
-      const closeButton = popup.querySelector('.popup__close')
-      // вешаем обработчик закрытия на кнопку, тут достаточно вызвать closeModal
-      closeButton.addEventListener('click', () => closeModal(popup))
-  
-      // вешаем обработчик закрытия на оверлей
-      popup.addEventListener('click', handleCloseOverlay)
-    })
+}
+// Функция закрытия модального окна через клик по оверлею
+function onModalOverlayClick(event) {
+  if (event.target.classList.contains("popup_is-opened")) {
+    closeModal(event.target);
+  }
+}
+// Функция открытия модального окна
+function openModal(modalElement) {
+  if (modalElement != null) {
+    modalElement.classList.add("popup_is-opened");
+    document.addEventListener("keydown", handleEscClose);
+    modalElement.addEventListener("mousedown", onModalOverlayClick);
+  }
+}
+// Функция закрытия модального окна
+function closeModal(modalElement) {
+  if (modalElement != null) {
+    modalElement.classList.remove("popup_is-opened");
+    document.removeEventListener("keydown", handleEscClose);
+    modalElement.removeEventListener("mousedown", onModalOverlayClick);
+  }
 }
 
-function closeModal(modal) {
-    modal.classList.remove('popup_is-opened')
-    document.removeEventListener('keydown', handleCloseEsc);
-  }
- 
-export {openModal, closeModal, setCloseClickListeners}
-
-
-
+export { openModal, closeModal };

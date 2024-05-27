@@ -41,7 +41,7 @@ buttonCloseList.forEach((btn) => {
 const profileForm = document.forms["edit-profile"];
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileSaveButton = popupProfileEdit.querySelector(".popup__button");
+const profileSaveButton = popupOpenProfile.querySelector(".popup__button");
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
 
@@ -55,7 +55,7 @@ const handleProfileFormSubmit = (evt) => {
     .then((profileData) => {
       profileTitle.textContent = profileData.name;
       profileDescription.textContent = profileData.about;
-      closeModal(popupProfileEdit);
+      closeModal(popupOpenProfile);
     })
     .catch(console.error)
     .finally(() => {
@@ -76,7 +76,7 @@ buttonCreateNewCard.addEventListener("click", () => {
 
 // Добавление карточек на страницу
 const newCardForm = document.forms["new-place"];
-const newCardSaveButton = popupNewCard.querySelector(".popup__button");
+const newCardSaveButton = popupCreateNewCard.querySelector(".popup__button");
 const cardNameInput = document.querySelector(".popup__input_type_card-name");
 const cardUrlInput = newCardForm.querySelector(".popup__input_type_url");
 
@@ -92,7 +92,7 @@ const handleAddForm = (evt) => {
     .then((cardData) => {
       const cardElement = createCard(cardData, delCard, LikeCard, openPopupImg, profileId);
       cardsContainer.prepend(cardElement);
-      closeModal(popupNewCard);
+      closeModal(popupCreateNewCard);
     })
     .catch(console.error)
     .finally(() => {

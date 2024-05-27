@@ -160,7 +160,7 @@ Promise.all([getUserInfo(), getInitialCards()])
     avatarImage.style.backgroundImage = `url(\\${profileData.avatar})`;
     profileTitle.textContent = profileData.name;
     profileDescription.textContent = profileData.about;
-    cardsData.forEach((item) => {
+    cardsData.forEach((cardData) => {
       cardsContainer.append(createCard(cardData, delCard, LikeCard, openPopupImg, profileId));
     });
   })

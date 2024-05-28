@@ -44,11 +44,9 @@ export const updateUserInfo = (userData) => {
       avatar: userData.avatar,
     }),
   })
-    .then(checkResponse)
-    .catch((err) => {
-      console.log(err);
-    });
+  .then(checkResponse)
 };
+
 // Функция для добавления новой карточки на сервер
 export const addNewCard = (cardData) => {
   return fetch(`${config.baseUrl}/cards`, {

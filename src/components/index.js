@@ -2,7 +2,6 @@ import "../pages/index.css";
 import { createCard, setupCardEvents, handleLike } from "./card.js";
 import { openModal, closeModal } from "./modal.js";
 import { enableValidation, clearValidation } from "./validation.js";
-import { removeCard } from "./api.js";
 import {
   getInitialCards,
   getUserInfo,

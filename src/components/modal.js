@@ -1,33 +1,32 @@
-// Функция закрытия модального окна через Escape
-function handleEscClose(event) {
-  if (event.key === "Escape") {
-    const openedModal = document.querySelector(".popup_is-opened");
-    if (openedModal) {
-      closeModal(openedModal);
-    }
-  }
+// Функция открытия и закрытия popup
+
+export function openPopup(popup) {
+  popup.classList.add("popup_is-opened");
+  document.addEventListener("click", closePopupOut);
+  document.addEventListener("keydown", closePopupByEsc);
 }
-// Функция закрытия модального окна через клик по оверлею
-function onModalOverlayClick(event) {
-  if (event.target.classList.contains("popup_is-opened")) {
-    closeModal(event.target);
-  }
+
+export function closePopup(popup) {
+  popup.classList.remove("popup_is-opened");
+  document.removeEventListener("click", closePopupOut);
+  document.removeEventListener("keydown", closePopupByEsc);
+  const forms = document.querySelectorAll(".popup__form");
+  forms.forEach((form) => {
+    form.reset();
+  });
 }
-// Функция открытия модального окна
-function openModal(modalElement) {
-  if (modalElement != null) {
-    modalElement.classList.add("popup_is-opened");
-    document.addEventListener("keydown", handleEscClose);
-    modalElement.addEventListener("mousedown", onModalOverlayClick);
-  }
-}
-// Функция закрытия модального окна
-function closeModal(modalElement) {
-  if (modalElement != null) {
-    modalElement.classList.remove("popup_is-opened");
-    document.removeEventListener("keydown", handleEscClose);
-    modalElement.removeEventListener("mousedown", onModalOverlayClick);
+
+// Функция для закрытия модального окна по клику вне его
+export function closePopupOut(event) {
+  if (event.target.classList.contains("popup")) {
+    closePopup(event.target);
   }
 }
 
-export { openModal, closeModal };
+// Функция для закрытия модальных окон по нажатию на кнопку Esc
+function closePopupByEsc(evt) {
+  if (evt.key === "Escape") {
+    const popup = document.querySelector(".popup_is-opened");
+    closePopup(popup);
+  }
+}

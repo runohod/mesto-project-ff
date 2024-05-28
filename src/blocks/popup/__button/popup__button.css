@@ -14,15 +14,17 @@
   margin-top: 48px;
 }
 
+.popup__submit_inactive {
+  color: #000;
+  background: #fff;
+  opacity: 20%;
+  border: 1px solid #000;
+  border-radius: 2px;
+}
+
 .popup__button:hover {
   background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
-}
-.popup__button:disabled {
-  background-color: transparent;
-  color: #AAA;
-  border: 1px solid #AAA;
-  cursor: not-allowed;
 }
 
 @media screen and (max-width: 568px) {
@@ -31,3 +33,8 @@
     line-height: 17px;
   }
 }
+
+
+
+
+

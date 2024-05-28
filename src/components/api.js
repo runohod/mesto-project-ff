@@ -5,92 +5,90 @@ const config = {
     "Content-Type": "application/json",
   },
 };
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-};
-// Функция для просмотра информации о пользователе
-export const getUserInfo = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  })
-    .then(checkResponse)
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
-};
-// Функция для посмотра массива с карточками
-export const getInitialCards = () => {
+
+// Функция для загрузки карточек с сервера
+
+export function getCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
-  })
-    .then(checkResponse)
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
-};
-// Функция для обновлении информации о пользователе
-export const updateUserInfo = (userData) => {
+  }).then(checkResponse);
+}
+// // Функция для загрузки информации пользователя с сервера
+
+export function getUzerData() {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers,
+  }).then(checkResponse);
+}
+
+// Функция редактирования профиля
+
+export function patchEditProfile(name, about) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      name: userData.name,
-      about: userData.about,
-      avatar: userData.avatar,
+      name: name,
+      about: about,
     }),
-  })
-  .then(checkResponse)
-};
+  }).then(checkResponse);
+}
 
-// Функция для добавления новой карточки на сервер
-export const addNewCard = (cardData) => {
+// Функция добавления новой карточки на сервер
+
+export function addNewCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
-      name: cardData.name,
-      link: cardData.link,
+      name: name,
+      link: link,
     }),
   }).then(checkResponse);
-};
-// Функция для добавления лайка
-export const likeCard = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "PUT",
-    headers: config.headers,
-  }).then(checkResponse);
-};
-// Функция для удаления лайка
-export const dislikeCard = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(checkResponse);
-};
-// Функция для удаления карточки
-export const removeCard = (cardId) => {
+}
+
+// Функция удаления карточки с сервера
+
+export function deleteCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   }).then(checkResponse);
-};
-// Функция для добавления аватара
-export const addNewAvatar = (avatarUrl) => {
+}
+
+// Функция для добавления лайка
+
+export function putLike(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: config.headers,
+  }).then(checkResponse);
+}
+
+// Функция для удаления ляйка
+
+export function deleteLike(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+}
+
+// Функция для обновления аватара пользователя
+
+export function changeAvatarUzer(avatar) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      avatar: avatarUrl,
+      avatar: avatar,
     }),
-  })
-    .then(checkResponse)
-    .then((data) => {
-      console.log("Изображение успешно добавлено", data);
-      return data;
-    });
+  }).then(checkResponse);
+}
+
+function checkResponse (res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
 };
